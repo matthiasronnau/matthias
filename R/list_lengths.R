@@ -5,6 +5,15 @@
 #' @export
 
 list_lengths <- function(x){
+  valid_input(x)
   lengths <- lapply(x, length)
   unlist(lengths)
+}
+
+#Helper function to ensure inputs are specified
+valid_input <- function(input){
+  if(is.null(input)){
+    stop("\n'x' must not be null")
+  }
+  TRUE
 }
