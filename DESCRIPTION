@@ -8,7 +8,8 @@ Description: This package contains a various set of functions that I have
   used while working on data analytics projects. Functions are useful for
   various data cleaning and data wrangling tasks.
 Depends:
-  R (>= 3.30)
+  R (>= 3.30),
+  dplyr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
