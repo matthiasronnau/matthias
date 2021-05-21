@@ -1,9 +1,12 @@
 #' @title Filter Read CSV
-#' @description Returns a filtered tibble.
-#' @param path A file path to a csv
-#' @param batch_size The size of each csv chunk to be read in
-#' @param filters A vector of filters to be applied. Each filter should start with the column name and NOT the name of the file
-#' @return tibble
+#' @description Iteratively reads in and filters a CSV file based on specified filters.
+#' @param path file path to a csv
+#' @param batch_size size of each csv chunk to be read in
+#' @param filters vector of filters to be applied. Each filter should start with the column name and
+#' NOT the name of the file; filter_read_csv will take care of this automatically. For example, if one
+#' of the filters was to be applied on the column "Age", the filter would be included in the vector
+#' as "Age < 40", NOT as "df$AGE < 40".
+#' @return A filtered tibble.
 #' @importFrom readr read_csv cols
 #' @export
 
