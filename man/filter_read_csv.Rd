@@ -7,9 +7,9 @@
 filter_read_csv(path, batch_size = 100, filters)
 }
 \arguments{
-\item{path}{file path to a csv}
+\item{path}{A file path to a local csv file.}
 
-\item{batch_size}{size of each csv chunk to be read in}
+\item{batch_size}{The size of each csv chunk to be read in.}
 
 \item{filters}{vector of filters to be applied. Each filter should start with the column name and
 NOT the name of the file; filter_read_csv will take care of this automatically. For example, if one
@@ -20,5 +20,5 @@ as "Age < 40", NOT as "df$AGE < 40".}
 A filtered tibble.
 }
 \description{
-Returns a filtered tibble.
+Iteratively reads in and filters a CSV file based on specified filters.
 }

@@ -1,7 +1,7 @@
 #' @title Filter Read CSV
 #' @description Iteratively reads in and filters a CSV file based on specified filters.
-#' @param path file path to a csv
-#' @param batch_size size of each csv chunk to be read in
+#' @param path A file path to a local csv file.
+#' @param batch_size The size of each csv chunk to be read in.
 #' @param filters vector of filters to be applied. Each filter should start with the column name and
 #' NOT the name of the file; filter_read_csv will take care of this automatically. For example, if one
 #' of the filters was to be applied on the column "Age", the filter would be included in the vector
@@ -24,7 +24,7 @@ filter_read_csv <- function(path, batch_size = 100, filters){
                           n_max = batch_size, col_types = readr::cols())
     colnames(data_temp) <- cols.names #Set the column names of the batch
     for(j in 1:filter_length){ #Iterate through every filter
-      data_temp <- subset(data_temp, eval(parse(text = paste("data_tempd$", filters[j], sep = "")))) #Subset the data based on the given filters
+      data_temp <- subset(data_temp, eval(parse(text = paste("data_temp$", filters[j], sep = "")))) #Subset the data based on the given filters
     }
     dat <- rbind(dat, data_temp) #rbind the filtered data to the filtered data from previous batches
     rm(data_temp_filtered) #Remove the filtered batch
