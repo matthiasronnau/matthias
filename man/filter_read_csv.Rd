@@ -4,12 +4,13 @@
 \alias{filter_read_csv}
 \title{Filter Read CSV}
 \usage{
-filter_read_csv(path, batch_size = 100, filters)
+filter_read_csv(path, batch_size, filters)
 }
 \arguments{
 \item{path}{A file path to a local csv file.}
 
-\item{batch_size}{The size of each csv chunk to be read in.}
+\item{batch_size}{The size of each csv chunk to be read in. If not specified, then the data will be
+broken into 10 chunks by default.}
 
 \item{filters}{vector of filters to be applied. Each filter should start with the column name and
 NOT the name of the file; filter_read_csv will take care of this automatically. For example, if one
