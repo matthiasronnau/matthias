@@ -4,7 +4,7 @@
 \alias{filter_read_csv}
 \title{Filter Read CSV}
 \usage{
-filter_read_csv(path, batch_size, filters)
+filter_read_csv(path, batch_size, cols, filters)
 }
 \arguments{
 \item{path}{A file path to a local csv file.}

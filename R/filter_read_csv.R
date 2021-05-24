@@ -22,7 +22,7 @@ filter_read_csv <- function(path, batch_size, cols, filters){
 
   for(i in 1:length(batches)){ #Iterate through every batch
     data_temp <- readr::read_csv(path, skip = batches[i], #Read in a batch_size amount of data
-                          n_max = batch_size, col_types = col_types = ifelse(is.null(cols), readr::cols(), cols), progress = FALSE)
+                          n_max = batch_size, col_types = ifelse(is.null(cols), readr::cols(), cols), progress = FALSE)
     colnames(data_temp) <- cols.names #Set the column names of the batch
     for(j in 1:filter_length){ #Iterate through every filter
       data_temp <- subset(data_temp, eval(parse(text = paste("data_temp$", filters[j], sep = "")))) #Subset the data based on the given filters
