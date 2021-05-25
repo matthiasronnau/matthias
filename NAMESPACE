@@ -2,6 +2,7 @@
 
 export("%nin%")
 export(filter_read_csv)
+export(find_mode)
 export(list_lengths)
 importFrom(readr,cols)
 importFrom(readr,read_csv)
