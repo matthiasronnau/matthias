@@ -19,7 +19,7 @@ find_mode <- function(vector, remove_na = TRUE) {
 }
 
 
-check_empty <- function(input){
+check_input <- function(input){
   if(is.null(input)){ #Check that the input is not empty
     stop("\n'vector' must not be null")
   }
