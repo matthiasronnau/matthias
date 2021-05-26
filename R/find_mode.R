@@ -10,12 +10,13 @@ find_mode <- function(vector, remove_na = TRUE) {
   check_logical(remove_na)
   if(remove_na){
     freq <- table(na.omit(vector))
-    names(freq)[which.max(freq)]
+    mode <- names(freq)[which.max(freq)]
   }
   else {
     freq <- table(vector)
-    names(freq)[which.max(freq)]
+    mode <- names(freq)[which.max(freq)]
   }
+  mode
 }
 
 
