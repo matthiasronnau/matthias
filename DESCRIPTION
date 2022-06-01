@@ -1,10 +1,10 @@
 Package: matthias
 Type: Package
-Title: General Set of Functions for Various Use
-Version: 0.1.0
-Authors@R: person("Matthias", "Ronnau", email = "matthias.ronnau@uci.edu",
+Title: Various Data Wrangling and Cleaning Functions
+Version: 1.0.0
+Authors@R: person("Matthias", "Ronnau", email = "matthias.ronnau@obagi.com",
                   role = c("aut", "cre"))
-Description: This package contains a various set of functions that I have
+Description: This package contains various functions that I have
   used while working on data analytics projects. Functions are useful for
   various data cleaning and data wrangling tasks.
 Depends:
