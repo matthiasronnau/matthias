@@ -31,6 +31,15 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date, max_date,
   }
 }
 
+check_identifier <- function(df, x){
+  if(is.na(x)){
+    TRUE
+  } else if(x %nin% colnames(df)){
+    stop("\n'identifier' must be blank or a column in the dataframe")
+  }
+  TRUE
+}
+
 
 
 

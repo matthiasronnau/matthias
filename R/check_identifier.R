@@ -4,14 +4,6 @@
 #' @param identifier A unique identifier to split the data by, such as a customer ID, product ID, etc.
 #' @return Nothing if valid, an error message if an invalid input.
 
-check_identifier <- function(df, x){
-  if(is.na(x)){
-    TRUE
-  } else if(x %nin% colnames(df)){
-    stop("\n'identifier' must be blank or a column in the dataframe")
-  }
-  TRUE
-}
 
 
 
