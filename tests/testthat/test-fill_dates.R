@@ -5,7 +5,7 @@ test_that("dates and values are filled correctly", {
                     sales = c(157, 70, 86, 112, 52, 70, 32, 97),
                     items = c(10, 5, 4, 7, 2, 4, 1, 8))
   filled <- fill_dates(dataframe = dat, identifier = customer, date_col = date, min_date = "2022/01/01",
-                       max_date = "2022/01/10", time_sequence = "day")
+                       max_date = "2022/01/10", time_sequence = "day", fill_data = list(sales = 0))
   expect_equal(nrow(filled), length(unique(dat$customer)) * 10)
 })
 

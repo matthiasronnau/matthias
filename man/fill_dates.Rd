@@ -8,10 +8,10 @@ fill_dates(
   dataframe,
   identifier = NA,
   date_col,
-  min_date,
-  max_date,
+  min_date = NA,
+  max_date = NA,
   time_sequence,
-  fill_data = NA
+  fill_data = list(NA)
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ fill_dates(
 
 \item{time_sequence}{The interval between dates, either "day", "week", "month", "quarter", or "year".}
 
-\item{fill_data}{The data that should be filled for missing values. Default are NAs.}
+\item{fill_data}{The data that should be filled for missing values. Default are NAs. Should be a list in the form of column_name = value.}
 }
 \value{
 A dataframe with missing entries filled.
