@@ -23,18 +23,18 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
   date_col <- ifelse(deparse(substitute(date_col)) == "NA", NA, deparse(substitute(date_col)))
   check_dat_col(dataframe, date_col)
   colnames(dataframe)[colnames(dataframe) == date_col] <- "date"
-  dataframe$date <- lubridate::as_date(dataframe$date)
+  dataframe$date <- as_date(dataframe$date)
 
   #Assign the appropriate dates to the min and max date parameters
   if(is.na(min_date)){
     min_date <- min(dataframe$date)
   } else {
-    min_date <- lubridate::as_date(min_date)
+    min_date <- as_date(min_date)
   }
   if(is.na(max_date)){
     max_date <- max(dataframe$date)
   }
-  max_date <- lubridate::as_date(max_date)
+  max_date <- as_date(max_date)
 
   #Ensure the identifier is valid
   id <- ifelse(deparse(substitute(identifier)) == "NA", NA, deparse(substitute(identifier)))
@@ -42,10 +42,10 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
 
   #Check if separate grouping needs to be done based on a category
   if(is.na(id)){
-    dataframe %>% tidyr::complete(date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)
+    dataframe %>% complete(date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)
   } else{
     split_data <- split(dataframe, dataframe[[id]]) #Split data based on grouping
-    as.data.frame(data.table::rbindlist(lapply(split_data, tidyr::complete, date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)))
+    as.data.frame(data.table::rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)))
   }
 }
 
