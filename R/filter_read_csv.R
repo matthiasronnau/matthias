@@ -17,12 +17,12 @@ filter_read_csv <- function(path, batch_size, cols, filters){
   size <- ifelse(is.null(batch_size), round(file_nrow / 10), batch_size)
   batches <- seq(from = 0, to = file_nrow + batch_size, by = size) #Prepare the batches based on the batch size and the overall file size
   dat = NULL #Initialize an empty dataframe
-  cols.names <- colnames(readr::read_csv(path, skip = batches[1], n_max = 0, col_types = ifelse(is.null(cols), readr::cols(), cols), progress = FALSE)) #Get column names from data
+  cols.names <- colnames(read_csv(path, skip = batches[1], n_max = 0, col_types = ifelse(is.null(cols), cols(), cols), progress = FALSE)) #Get column names from data
   filter_length <- length(filters) #Count number of filters inputed
 
   for(i in 1:length(batches)){ #Iterate through every batch
-    data_temp <- readr::read_csv(path, skip = batches[i], #Read in a batch_size amount of data
-                          n_max = batch_size, col_names = cols.names, col_types = ifelse(is.null(cols), readr::cols(), cols), progress = FALSE)
+    data_temp <- read_csv(path, skip = batches[i], #Read in a batch_size amount of data
+                          n_max = batch_size, col_names = cols.names, col_types = ifelse(is.null(cols), cols(), cols), progress = FALSE)
     for(j in 1:filter_length){ #Iterate through every filter
       data_temp <- subset(data_temp, eval(parse(text = paste("data_temp$", filters[j], sep = "")))) #Subset the data based on the given filters
     }
