@@ -5,7 +5,7 @@ The package "matthias" houses functions that have been developed while working o
 * **_filter_read_csv_** is useful when you have a very large file, such as a multi-gigabyte CSV/ Excel file, which you will eventually need to filter down. Sometimes this can take quite a long time to do within R, or even crash your session. This function iteratively reads in and filters your data so that your memory limit is not exceeded.
 * **_list_lengths_** calculates the length of items in a list/vector/etc.
 * **_find_mode_** is a quick way to find the item that appears most frequently in your data. R has built in methods for finding the mean, min, max, etc., but not the mode, hence the find_mode function.
-* fill_dates
+* **_fill_dates_** imputes missing data entries in a dataframe and fills the remaining columns with data specified by the users, or NAs. This can be useful when conducting data on a time series and not all consecutive dates are present.
 
 ___
 ### Motivation
