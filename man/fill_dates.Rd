@@ -21,9 +21,9 @@ fill_dates(
 
 \item{date_col}{The date column of the dataframe.}
 
-\item{min_date}{The minimum date in the range that you want to fill.}
+\item{min_date}{The minimum date in the range that you want to fill. If left blank, then the minimum value in the data is taken.}
 
-\item{max_date}{The maximum date in the range that you want to fill.}
+\item{max_date}{The maximum date in the range that you want to fill. If left blank, then the maximum value in the data is taken.}
 
 \item{time_sequence}{The interval between dates, either "day", "week", "month", "quarter", or "year".}
 

@@ -11,6 +11,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom tidyr complete
 #' @importFrom lubridate as_date
+#' @importFrom data.table rbindlist
 #' @export
 
 fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_date = NA, time_sequence, fill_data = list(NA)){
@@ -47,7 +48,7 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
   } else{
     colnames(dataframe)[colnames(dataframe) == id] <- "unique_identifier"
     split_data <- split(dataframe, dataframe$unique_identifier) #Split data based on grouping
-    df <- as.data.frame(data.table::rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)))
+    df <- as.data.frame(rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)))
     df$unique_identifier <- rep(names(split_data), each = nrow(df) / length(split_data))
     colnames(df)[colnames(df) == "unique_identifier"] <- id #Reassign the name of the identifier column to the name in the original data
   }
