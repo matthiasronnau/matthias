@@ -3,11 +3,12 @@
 #' @param dataframe The original data with missing entries for certain dates.
 #' @param identifier A unique identifier to split the data by, such as a customer ID, product ID, etc.
 #' @param date_col The date column of the dataframe.
-#' @param min_date The minimum date in the range that you want to fill.
-#' @param max_date The maximum date in the range that you want to fill.
+#' @param min_date The minimum date in the range that you want to fill. If left blank, then the minimum value in the data is taken.
+#' @param max_date The maximum date in the range that you want to fill. If left blank, then the maximum value in the data is taken.
 #' @param time_sequence The interval between dates, either "day", "week", "month", "quarter", or "year".
 #' @param fill_data The data that should be filled for missing values. Default are NAs. Should be a list in the form of column_name = value.
 #' @return A dataframe with missing entries filled.
+#' @importFrom magrittr %>%
 #' @importFrom tidyr complete
 #' @importFrom lubridate as_date
 #' @export
@@ -45,17 +46,13 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
     df <- dataframe %>% complete(date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)
   } else{
     colnames(dataframe)[colnames(dataframe) == id] <- "unique_identifier"
-    #identifiers <- unique(dataframe$unique_identifier)
     split_data <- split(dataframe, dataframe$unique_identifier) #Split data based on grouping
-    #print(split_data)
-    df <- as.data.frame(data.table::rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence),
-                                                     fill = fill_data)))#append(fill_data))))#), list(unique_identifier = )))))
+    df <- as.data.frame(data.table::rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)))
     df$unique_identifier <- rep(names(split_data), each = nrow(df) / length(split_data))
-    colnames(df)[colnames(df) == "unique_identifier"] <- id
+    colnames(df)[colnames(df) == "unique_identifier"] <- id #Reassign the name of the identifier column to the name in the original data
   }
-  colnames(df)[colnames(df) == "date"] <- date_col
+  colnames(df)[colnames(df) == "date"] <- date_col #Reassign the name of the date column to the name in the original data
   df
-  #split_data
 }
 
 check_time_sequence <- function(x){
