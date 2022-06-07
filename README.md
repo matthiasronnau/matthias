@@ -19,3 +19,7 @@ Install the development version from GitHub via the package "devtools":
 
     # install "matthias" (without vignettes)
     devtools::install_github("matthiasronnau/matthias")
+
+
+    # install "matthias" (with vignettes)
+    devtools::install_github("matthiasronnau/matthias", build_vignettes = TRUE)
