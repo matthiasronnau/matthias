@@ -14,12 +14,12 @@ ___
 ### Installation
 Install the development version from GitHub via the package "devtools":
     
-    # development version from GitHub:
-    #install.packages("devtools") 
+    Development version from GitHub:
+    install.packages("devtools") 
 
-    # install "matthias" (without vignettes)
+    Install "matthias" (without vignettes)
     devtools::install_github("matthiasronnau/matthias")
 
 
-    # install "matthias" (with vignettes)
+    Install "matthias" (with vignettes)
     devtools::install_github("matthiasronnau/matthias", build_vignettes = TRUE)
