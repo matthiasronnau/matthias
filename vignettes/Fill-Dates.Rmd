@@ -30,7 +30,7 @@ When working with time series data, it is important to ensure that all of the ne
 set.seed(537)
 dat <- data.frame(date = c("2022/05/03", "2022/05/04", "2022/05/05", "2022/05/06", "2022/05/09", "2022/05/10", "2022/05/11", "2022/05/15"),
                     customer = c("6487", "6487", "5132", "6487", "2401", "2401", "2401", "6487"),
-                    sales = sample(20:200, replace = TRUE),
+                    sales = sample(20:200, 8, replace = TRUE),
                     items = sample(1:20, 8, replace = TRUE))
 ```
 
@@ -40,10 +40,10 @@ The above dataframe has dates that transactions were made, a customer number, th
 filled <- fill_dates(dat, identifier = customer, date_col = date, 
                      min_date = "2022/05/03", max_date = "2022/05/15", time_sequence = "day", 
                      fill_data = list(sales = 0, items = 0))
-filled
+head(filled, n = 26)
 ```
 
-
+The datafrmae has now been filled with the missing date values for each customer. The missing values for sales and items have been filled with zeros.
 
 
 
