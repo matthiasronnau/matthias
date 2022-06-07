@@ -1,0 +1,58 @@
+---
+title: "Fill-Dates"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fill-Dates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(matthias)
+```
+
+### Overview of _fill_dates_
+
+When working with time series data, it is important to ensure that all of the necessary data is present. Sometimes certain points in time may not have data recorded, and this can be challenging when conducting certain analysis. For example, if analyzing how multiple customers purchased over 4 quarters, it would be necessary to have data present for all available customers, even if they did not make any purchases. That way, when calculating summary statistics such as means and variances, the values will be accurate as all data points are present.
+
+**_fill_dates_** can be used to fill in these missing data points. Simply pass in a dataframe, the name of the data column in your data set, and the min/max date your time series covers, and fill_dates will do the rest. Additionally, users can pass in what they wish for the remaining columns to be filled with; the default value is `NA`. If there are more than one unique "group", such as a customer, location, etc., users can pass in the name of the column which identifies which row belongs to which group, and fill_dates will fill missing data in the date range for all unique groups.
+
+### Usage
+
+```{r}
+set.seed(537)
+dat <- data.frame(date = c("2022/05/03", "2022/05/04", "2022/05/05", "2022/05/06", "2022/05/09", "2022/05/10", "2022/05/11", "2022/05/15"),
+                    customer = c("6487", "6487", "5132", "6487", "2401", "2401", "2401", "6487"),
+                    sales = sample(20:200, replace = TRUE),
+                    items = sample(1:20, 8, replace = TRUE))
+```
+
+The above dataframe has dates that transactions were made, a customer number, the sales amount, and the number of items purchased.
+
+```{r}
+filled <- fill_dates(dat, identifier = customer, date_col = date, 
+                     min_date = "2022/05/03", max_date = "2022/05/15", time_sequence = "day", 
+                     fill_data = list(sales = 0, items = 0))
+filled
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

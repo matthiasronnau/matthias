@@ -42,11 +42,19 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
 
   #Check if separate grouping needs to be done based on a category
   if(is.na(id)){
-    dataframe %>% complete(date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)
+    df <- dataframe %>% complete(date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)
   } else{
-    split_data <- split(dataframe, dataframe[[id]]) #Split data based on grouping
-    as.data.frame(data.table::rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence), fill = fill_data)))
+    colnames(dataframe)[colnames(dataframe) == id] <- "unique_identifier"
+    identifiers <- unique(dataframe$unique_identifier)
+    split_data <- split(dataframe, dataframe$unique_identifier) #Split data based on grouping
+    #print(split_data)
+    df <- as.data.frame(data.table::rbindlist(lapply(split_data, complete, date = seq.Date(min_date, max_date, by = time_sequence),
+                                                     fill = fill_data)))#append(fill_data))))#), list(unique_identifier = )))))
+    df$unique_identifier <- rep(identifiers, each = nrow(df) / length(split_data))
+    colnames(df)[colnames(df) == "unique_identifier"] <- id
   }
+  colnames(df)[colnames(df) == "date"] <- date_col
+  df
 }
 
 check_time_sequence <- function(x){
