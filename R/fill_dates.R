@@ -22,7 +22,7 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
   check_time_sequence(time_sequence)
 
   #Assign the date column a standard name and convert it to a date type
-  date_col <- ifelse(deparse(substitute(date_col)) == "NA", NA, deparse(substitute(date_col)))
+  date_col <- ifelse(is.na(deparse(substitute(date_col))), NA, deparse(substitute(date_col)))
   check_dat_col(dataframe, date_col)
   colnames(dataframe)[colnames(dataframe) == date_col] <- "date"
   dataframe$date <- as_date(dataframe$date)
@@ -39,7 +39,7 @@ fill_dates <- function(dataframe, identifier = NA, date_col, min_date = NA, max_
   max_date <- as_date(max_date)
 
   #Ensure the identifier is valid
-  id <- ifelse(deparse(substitute(identifier)) == "NA", NA, deparse(substitute(identifier)))
+  id <- ifelse(is.na(deparse(substitute(identifier))), NA, deparse(substitute(identifier)))
   check_identifier(dataframe, id)
 
   #Check if separate grouping needs to be done based on a category
